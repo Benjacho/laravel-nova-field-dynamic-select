@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubertnnn\LaravelNova\Fields\DynamicSelect\Traits;
+namespace EsferaMedica\DynamicSelect\Traits;
 
 trait DependsOnAnotherField
 {

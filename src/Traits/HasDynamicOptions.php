@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubertnnn\LaravelNova\Fields\DynamicSelect\Traits;
+namespace EsferaMedica\DynamicSelect\Traits;
 
 use Closure;
 
@@ -24,8 +24,8 @@ trait HasDynamicOptions
         $result = [];
         foreach ($options as $key => $option) {
             $result[] = [
-                'value' => $key,
-                'label' => $option,
+                'value' => $option->id,
+                'label' => $option->name,
             ];
         }
 

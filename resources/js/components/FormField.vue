@@ -1,15 +1,18 @@
 <template>
     <default-field :field="field" :errors="errors">
         <template slot="field">
+            <div style="height: 100px">
             <multiselect
                 v-model="value"
                 :options="options"
                 :searchable="true"
                 track-by="value"
                 label="label"
-                placeholder="Pick a value"
+                :max-height="150"
+                :placeholder="field.name"
                 @input="onChange">
             </multiselect>
+            </div>
         </template>
     </default-field>
 </template>
@@ -53,7 +56,7 @@ export default {
          */
         setInitialValue() {
             this.options = this.field.options;
-
+            console.log(this.options);
             if(this.field.value) {
                 this.value = this.options.find(item => item['value'] === this.field.value);
             }
@@ -92,7 +95,9 @@ export default {
                 value: this.value,
                 field: this.field
             });
-            this.options = (await Nova.request().post("/nova-vendor/dynamic-select/options", {
+
+            console.log(this.field);
+            this.options = (await Nova.request().post("/nova-vendor/dynamic-select/options/", {
                 resource: this.resourceName,
                 attribute: this.field.attribute,
                 depends: this.getDependValues(dependsOnValue.value, dependsOnValue.field.attribute.toLowerCase())

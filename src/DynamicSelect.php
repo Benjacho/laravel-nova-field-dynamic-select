@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubertnnn\LaravelNova\Fields\DynamicSelect;
+namespace EsferaMedica\DynamicSelect;
 
-use Hubertnnn\LaravelNova\Fields\DynamicSelect\Traits\DependsOnAnotherField;
-use Hubertnnn\LaravelNova\Fields\DynamicSelect\Traits\HasDynamicOptions;
+use EsferaMedica\DynamicSelect\Traits\DependsOnAnotherField;
+use EsferaMedica\DynamicSelect\Traits\HasDynamicOptions;
 use Laravel\Nova\Fields\Field;
 
 class DynamicSelect extends Field

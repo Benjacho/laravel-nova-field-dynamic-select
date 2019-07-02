@@ -1,10 +1,12 @@
 <?php
 
-namespace Hubertnnn\LaravelNova\Fields\DynamicSelect\Http\Controllers;
+namespace EsferaMedica\DynamicSelect\Http\Controllers;
 
-use Hubertnnn\LaravelNova\Fields\DynamicSelect\DynamicSelect;
+use EsferaMedica\DynamicSelect\DynamicSelect;
 use Illuminate\Routing\Controller;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Account;
+use EsferaMedica\SharedCore\SharedCore;
 
 class OptionsController extends Controller
 {
@@ -12,16 +14,27 @@ class OptionsController extends Controller
     {
         $attribute = $request->input('attribute');
         $dependValues = $request->input('depends');
-
-        $resource = $request->newResource();
+/*         $model = app($request->attribute);
+ */        /* $resource = $request->newResource();
         $fields = $resource->updateFields($request);
         $field = $fields->findFieldByAttribute($attribute);
+        dd($field); */
 
         /** @var DynamicSelect $field */
-        $options = $field->getOptions($dependValues);
-
+        /* $options = $field->getOptions($dependValues); */
+        $options =  \App\Account::where('company_id', $dependValues['company'])->where('business_center_id', $dependValues['business'])->active()->watchForFeatured()->get();
+        $result = [];
+        if($options){
+            foreach ($options as $key => $option) {
+                $result[] = [
+                    'value' => $option->id,
+                    'label' => $option->name,
+                ];
+            }
+        }
+        
         return [
-            'options' => $options,
+            'options' => $result,
         ];
     }
 }
